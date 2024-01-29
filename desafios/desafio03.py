@@ -1,5 +1,5 @@
-n1 = input('Digite o primeiro valor da soma:')
-n2 = input('Digite o segundo valor da soma:')
-n1 = int(n1)
-n2 = int(n2)
-print('O valor da soma é:', n1+n2)
+n1 = int(input('Digite o primeiro valor da soma:'))
+n2 = int(input('Digite o segundo valor da soma:'))
+s = n1 + n2
+
+print(f'O valor da soma é: {s}')
