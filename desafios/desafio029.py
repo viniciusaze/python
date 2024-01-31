@@ -5,3 +5,4 @@ if vel > 80:
     print(f'Valor da multa: R${multa:.2f}')
 else:
     print('Velocidade permitida.')
+print('Tenha um bom dia, dirija com segurança!')
