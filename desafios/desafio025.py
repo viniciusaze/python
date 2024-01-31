@@ -1,2 +1,3 @@
-nome = input('Digite seu nome: ')
-print(f'Seu nome possui Silva? {'Silva' in nome}')
+nome = input('Digite seu nome: ').strip()
+min = nome.lower()
+print(f'Seu nome possui Silva? {'silva' in min}')
