@@ -5,7 +5,7 @@ print('-*' * 25)
 print('Vamos jogar, será que você me ganha ??? HEHEHEHEHE')
 print('-*' * 25)
 
-jogador = input('Escolha sua jogada: PEDRA PAPEL TESOURA ').strip().lower()
+jogador = input('Escolha sua jogada: \nPEDRA \nPAPEL \nTESOURA ').strip().lower()
 lista = ['PEDRA','PAPEL','TESOURA']
 pc = choice(lista).lower()
 

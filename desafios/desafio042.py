@@ -7,8 +7,10 @@ if n1 < (n2 + n3) and n2 < (n1 + n3) and n3 < (n2 + n1):
         print('Triângulo Equilátero:\nTodos os lados são iguais') 
     elif n1 == n2 or n1 == n3 or n2 == n3:
         print('Triângulo Isóceles:\nDois lados iguais') 
+    #elif n1 == n2 == n3: (PODE SER FEITO ASSIM)
     elif n1 != n2 or n2 != n3 or n3 != n1:
         print('Triângulo Escaleno:\nTodos os lados diferentes')
+    #elif n1 != n2 != n3 != n1: (PODE SER FEITO ASSIM)
 else:
     print('As retas não formam um triângulo!')
     
