@@ -1,5 +1,11 @@
-frase = input('Digite uma frase: ').strip
+frase = input('Digite uma frase: ').strip().upper()
 frasediv = frase.split()
-frasese = ''.join(frasediv)
+junto = ''.join(frasediv)
+inverso = ''
+for letra in range(len(junto) - 1, -1, -1):
+    inverso += junto[letra]
 
-print(frasese)
+if inverso == junto:
+    print('Palíndromo')
+else:
+    print('Não é palíndromo.')
