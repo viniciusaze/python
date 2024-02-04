@@ -27,4 +27,6 @@ Opção: '''))
     elif op == 4:
         n1 = int(input('Digite os novos valores do primeiro número: '))
         n2 = int(input('Digite os novos valores do segundo número: '))
+    elif op > 5 or op < 1:
+        print('Opção inválida. Tente novamente')
 print('Fim do programa!')
