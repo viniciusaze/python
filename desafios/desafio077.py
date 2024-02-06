@@ -1,5 +1,7 @@
 palavras = ('casa', 'cachorro', 'computador', 'banana', 'suco', 'mesa', 'mouse', 'aprender', 'curso')
 
-print(palavras[1])
-if palavras[1] in 'aeiou':
-    print(f'Na palavra {palavras[1].upper()}')
+for pos in palavras: # Para as palavras na tupla
+    print(f'\nNa palavra {pos.capitalize()} temos: ', end='')
+    for letra in pos: # Para as letras na palavra
+        if letra.lower() in 'aeiou':
+            print(letra, end=' ')
