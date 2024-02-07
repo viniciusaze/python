@@ -12,10 +12,12 @@ while True:
             continuar = input('Quer continuar? [S/N] ').strip().upper()
 print('-=' * 20)
 print(f'Lista: {num}')
-for i, v in range(0, len(num)):
+
+for i, v in enumerate(num): #para checar os valores e separar par de impar
     if v % 2 == 0:
         numpar.append(v)
     else:
         numimpar.append(v)
+print('-=' * 30)
 print(f'Lista de números PARES: {numpar}')
 print(f'Lista de números ÍMPARES: {numimpar}')
