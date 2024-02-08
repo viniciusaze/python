@@ -4,6 +4,9 @@ matriz =[]
 dados1 = []
 dados2 = []
 dados3 = []
+
+# PREENCHENDO A MATRIZ
+
 for c in range(0, 3):
     n = int(input(f'Digite um valor para [{l},{c}]: '))
     c += 1
@@ -27,7 +30,11 @@ for c in range(0, 3):
     matriz.append(dados3[:])
     dados3.clear()
 
+
+# EXIBINDO A MATRIZ
+
 print('-=' * 20)
+
 for n in matriz[:3]:
     print(f'{n}', end='')
 print()
@@ -38,6 +45,8 @@ for n in matriz[6:10]:
     print(f'{n}', end='')
 print()
 print('-=' * 20)
+
+# RESULTADOS
 
 somapar = 0
 for n in matriz:
