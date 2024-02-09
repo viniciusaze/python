@@ -25,13 +25,12 @@ while True:
     pessoa['idade'] = idade
     pessoa['sexo'] = sexo
     todos.append(pessoa.copy())
-    res = input('Quer continuar? [S/N] ').strip().upper()
 
+    res = input('Quer continuar? [S/N] ').strip().upper()
     if res == 'N':
-        
         break
     else:
-        while res != 'S':
+        while res not in 'SN':
             res = input('Quer continuar? [S/N] ').strip().upper()
 
 print('-=' * 30)
