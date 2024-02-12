@@ -1,3 +1,4 @@
+from time import sleep
 def maior(* num):
     print('-=' * 30)
     maior = 0
@@ -5,7 +6,8 @@ def maior(* num):
     print('Analisando os valores passados...')
     cont = 0
     for v in valores:
-        print(f'{v} ', end='')
+        print(f'{v} ', end='', flush=True)
+        sleep(0.3)
         if cont == 0:
             maior = v
         if v > maior:

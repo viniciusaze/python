@@ -2,8 +2,8 @@ def linha():
     print('-' * 30)
 
 def area(a, b):
-    a = l * c
-    print(f'A área de um terreno de {l}x{c} é de {a:.2f}m²')
+    area = l * c
+    print(f'A área de um terreno de {a}x{b} é de {area:.2f}m²')
 linha()
 print(' > Controle de Terrenos < ')
 linha()
