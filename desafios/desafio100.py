@@ -1,7 +1,7 @@
 from random import randint
 from time import sleep
 
-def sorteio(numeros):
+def sorteio(listas):
     print(f'Sorteando os 5 valores:')
     for c in range(0, 5):
         n = randint(1, 10)
@@ -10,7 +10,7 @@ def sorteio(numeros):
         print(f'{n} ', end='', flush=True)
     print('Pronto!!!')
 
-def somaPar(numeros):
+def somaPar(listas):
     soma = 0
     for n in numeros:
         if n % 2 == 0:
@@ -22,7 +22,9 @@ numeros = []
 sorteio(numeros)
 somaPar(numeros)
 
-n = []
-sorteio(n)
-somaPar(n)
+numeros.clear()
+
+num = []
+sorteio(num)
+somaPar(num)
 
