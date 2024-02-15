@@ -1,10 +1,10 @@
 def leiaInt(n):
     while True:
         num = input(n)
-        if num not in '1234567890':
-            print('ERRO! Digite um número inteiro válido!')
-        else:
+        if num.isnumeric():
             return num
+        else:
+            print('\033[0;31mERRO! Digite um número inteiro válido!\033[m')
     
     
 

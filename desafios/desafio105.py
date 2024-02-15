@@ -16,14 +16,14 @@ def notas(* num, sit=False):
     dic['maior'] = maior
     dic['menor'] = menor
     dic['media'] = media
-    dic['situação'] = 'BOA', 'RUIM', 'RAZOÁVEL'
-    if media < 6:
-        sit =dic['situação'][1]
-    if media >=6 and media < 7:
-        sit = dic['situação'][2]
-    else:
-        sit = dic['situação'][0]
+    if sit:
+        if dic['media'] <= 5:
+            dic['situação'] = 'RUIM'
+        elif dic['media'] >= 7:
+            dic['situação'] = 'BOA'
+        else:
+            dic['situação'] = 'RAZOÁVEL'
     return dic
 
-res = notas(3.5, 2, 6.5)
-print(res)
+resp = notas(8, 7, 6.5, sit=True)
+print(resp)
