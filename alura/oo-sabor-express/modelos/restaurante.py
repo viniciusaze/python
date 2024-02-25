@@ -1,4 +1,5 @@
 from modelos.avaliacao import Avaliacao
+from modelos.cardapio.item_cardapio import ItemCardapio
 
 class Restaurante:
     
@@ -9,6 +10,7 @@ class Restaurante:
         self._categoria = categoria.upper()
         self._ativo = False # O _ é usado para informar que o atributo deve ser protegido, usado como uma boa prática
         self._avaliacao = []
+        self._cardapio = []
         Restaurante.restaurantes.append(self)
     
     def __str__(self): #Forma de exibir o objeto em forma de texto
@@ -23,7 +25,7 @@ class Restaurante:
             print(f'{restaurante._nome.ljust(25)} | {restaurante._categoria.ljust(25)} | {str(restaurante.media_avaliacoes).ljust(25)} | {restaurante.ativo}')
 
     @property 
-    #property pega um ativo/atributo e altera a forma como vai ser lido
+    #property pega um ativo/atributo e altera a forma como vai ser lido, usado quando se deseja somente para leitura. Quando for property, nao precisa () ao execurtar no app
     def ativo(self):
         return '✅' if self._ativo else '❌'
     
@@ -44,4 +46,29 @@ class Restaurante:
         media = (soma_das_notas / quantidade_de_notas)
         media5 = round(media / 2, 1)
         return media5
+    
+    #def adicionar_bebida_no_cardapio(self, bebida):
+    #    self._cardapio.append(bebida)
+
+    #def adicionar_prato_no_cardapio(self, prato):
+    #    self._cardapio.append(prato)
+
+    def adicionar_no_cardapio(self, item):
+        if isinstance(item, ItemCardapio): #isinstace, pega o item e compara com o ItemCardapio. A função isinstance vai ser verdadeira se o item que passamos como argumento for uma instancia da classe itemcardapio ou derivada
+            self._cardapio.append(item)
+
+    @property
+    def exibir_cardapio(self):
+        print(f'Cardápio do restaurante {self._nome}\n')
+        for i,item in enumerate(self._cardapio, start=1):
+            if hasattr(item, 'descricao'):
+                mensagem_prato = f'{i}. Nome: {item._nome} | Preço R$ {item._preco:.2f} | Descrição: {item.descricao}'
+                print(mensagem_prato)
+            else:
+                menssagem_bebida = f'{i}. Nome: {item._nome} | Preço R$ {item._preco:.2f} | Tamanho: {item.tamanho}'
+                print(menssagem_bebida)
+            # hasattr para checar se tem o atributo 'descricao' no item
+                
+
+
 
