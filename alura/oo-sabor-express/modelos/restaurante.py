@@ -1,8 +1,9 @@
 from modelos.avaliacao import Avaliacao
 
 class Restaurante:
+    
     restaurantes = []
-
+    
     def __init__(self, nome, categoria):
         self._nome = nome.title()
         self._categoria = categoria.upper()
@@ -30,13 +31,14 @@ class Restaurante:
         self._ativo = not self._ativo # not inverte o estado
 
     def receber_avaliacao(self, cliente, nota):
-        avaliacao = Avaliacao(cliente, nota)
-        self._avaliacao.append(avaliacao)
+        #if 0 < nota <= 5:
+            avaliacao = Avaliacao(cliente, nota)
+            self._avaliacao.append(avaliacao)
 
     @property
     def media_avaliacoes(self):
         if not self._avaliacao:
-            return f'Restaurante {self._nome} ainda não possui avaliação'
+            return f'-'
         soma_das_notas = sum(avaliacao._nota for avaliacao in self._avaliacao)
         quantidade_de_notas = len(self._avaliacao)
         media = (soma_das_notas / quantidade_de_notas)
