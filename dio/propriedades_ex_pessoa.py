@@ -14,4 +14,5 @@ class Pessoa:
     
 
 pessoa = Pessoa('Vinicius', 1995)
-print(f'Nome: {pessoa.nome} \tIdade: {pessoa.idade}') #Note que as property não usam os (), pois não são metodos e sim propriedades
+print(f'Nome: {pessoa.nome} \tIdade: {pessoa.idade}') 
+#Note que as property não usam os (), pois não são metodos e sim propriedades
