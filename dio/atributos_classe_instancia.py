@@ -8,11 +8,13 @@ class Estudante:
 
     def __str__(self):
         return f'{self.nome} - {self.matricula} - {self.escola}'
-    
+
+
 def mostrar_matricula(*objeto):
     for obj in objeto:
         print(obj)
-    
+
+
 aluno1 = Estudante('Vinicius', 200608) 
 aluno2 = Estudante('Fernanda', 201008)
 
