@@ -1,12 +1,11 @@
 import sqlalchemy
 from sqlalchemy.orm import declarative_base, Session
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column , create_engine, inspect
+from sqlalchemy import Column , create_engine, inspect, select, func
 from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy import ForeignKey
 from sqlalchemy import select
-
 
 
 Base = declarative_base() # Declarando a base
@@ -77,15 +76,32 @@ with Session(engine) as session:
 
     session.commit()
 
-stmt = select(User).where(User.name.in_(['Vinicius', 'Fernanda']))
-print()
-print('Recuperando usuários a partir de condição de filtragem')
-for user in session.scalars(stmt):
+stmt_user = select(User).where(User.name.in_(['Vinicius', 'Fernanda']))
+print('\nRecuperando usuários a partir de condição de filtragem')
+for user in session.scalars(stmt_user):
     print(user)
 
 stmt_address = select(Address).where(Address.user_id.in_([2]))
-print()
-print('Recuperando endereços a partir de condição de filtragem')
+print('\nRecuperando endereços a partir de condição de filtragem')
 for address in session.scalars(stmt_address):
     print(address)
 
+stmt_order = select(User).order_by(User.fullname.desc()) # Padrão de ordenamento é ascendente
+print('\nRecuperando informação de maneira ordenada')
+for result in session.scalars(stmt_order):
+    print(result)
+
+stmt_join = select(User.fullname, Address.email_address).join_from(Address, User)
+for result in session.scalars(stmt_join):
+    print(result)
+
+connection = engine.connect()
+results = connection.execute(stmt_join).fetchall()
+print('\nExecutando statement a partir da connection')
+for result in results:
+    print(result)
+
+stmt_count = select(func.count('*')).select_from(User)
+print('\nTotal de instancias em User')
+for result in session.scalars(stmt_count):
+    print(result)
