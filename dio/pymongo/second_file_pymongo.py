@@ -1,4 +1,3 @@
-import datetime
 import pprint
 
 import pymongo
@@ -40,3 +39,14 @@ print("\nColeções armazenadas no mongodb")
 collections = db.list_collection_names()
 for collection in collections:
     print(collection)
+
+# Removendo documentos
+db['posts'].drop()
+
+posts.delete_one({"author": "Mike"})
+posts.drop()
+
+
+# Deletando o bd
+client.drop_database('test')
+print(db.list_collection_names())
