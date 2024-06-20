@@ -87,4 +87,10 @@ with Session(engine) as session:
             balance=1487.82
         )]
     )
+    # Sending to db
+    session.add_all([client_1, client_2, client_3])
+    session.commit()
+
+
+
 
