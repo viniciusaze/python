@@ -57,7 +57,7 @@ with Session(engine) as session:
         cpf="03643545002",
         address="Rio Grande do Sul",
         account=[Account(
-            type="Conta corrente",
+            type="Current account",
             agency="00216505",
             number_account=886312,
             balance=567.98
@@ -67,12 +67,24 @@ with Session(engine) as session:
     client_2 = Client(
         name="Gabriel Teixeira Fagundes",
         cpf="064874650",
-        address="Paraná"
+        address="Paraná",
+        account=[Account(
+            type="Savings account",
+            agency="00216514",
+            number_account=887801,
+            balance=5650.0
+        )]
     )
 
     client_3 = Client(
         name="Camila da Silva",
         cpf="874320654",
-        address="Paraná"
+        address="Paraná",
+        account=[Account(
+            type="Current account",
+            agency="00214479",
+            number_account=883320,
+            balance=1487.82
+        )]
     )
 
