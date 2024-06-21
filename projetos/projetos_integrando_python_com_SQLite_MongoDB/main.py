@@ -4,8 +4,6 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column
 from sqlalchemy import create_engine
-from sqlalchemy import inspect
-from sqlalchemy import select
 from sqlalchemy import func
 from sqlalchemy import Integer
 from sqlalchemy import String
@@ -29,6 +27,10 @@ class Client(Base):
     # Create relationship
     account = relationship("Account", back_populates="client")
 
+    # Create representation
+    def __repr__(self):
+        return f"ID Client: {self.id} | Client: {self.name} | CPF: {self.cpf} | Address: {self.address}"
+
 
 class Account(Base):
     # Create Table and attributes of Account
@@ -43,6 +45,11 @@ class Account(Base):
 
     # Create relationship
     client = relationship("Client", back_populates="account")
+
+    # Create representation
+    def __repr__(self):
+        return (f"ID Account: {self.id} | Type: {self.type} | Agency: {self.agency} | Account: {self.number_account} | "
+                f"Balance: {self.balance:.2f}")
 
 
 # Connecting with database
@@ -90,6 +97,38 @@ with Session(engine) as session:
     # Sending to db
     session.add_all([client_1, client_2, client_3])
     session.commit()
+
+
+def view_clients():
+    stmt_all_client = select(Client)
+    for client in session.scalars(stmt_all_client):
+        print(client)
+
+
+def view_accounts():
+    stmt_all_accounts = select(Account)
+    for account in session.scalars(stmt_all_accounts):
+        print(account)
+
+
+def search_client_by_id(id):
+    stmt_search_clients = select(Client).where(Client.id == id)
+    client = session.scalars(stmt_search_clients).first()
+    return client
+
+
+def search_account_by_id(id):
+    stmt_search_account = select(Account).where(Account.id == id)
+    account = session.scalars(stmt_search_account).first()
+    return account
+
+
+def user_balance(id):
+    stmt_client_balance = (select(Client.name, Client.cpf, Account.type, Account.balance).where(Client.id == id).
+                           join_from(Client, Account))
+    client = session.scalars(stmt_client_balance).first()
+    return client
+    
 
 
 
