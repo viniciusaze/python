@@ -1,4 +1,5 @@
-import sqlalchemy
+import os
+from time import sleep
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import relationship
@@ -99,37 +100,129 @@ with Session(engine) as session:
     session.commit()
 
 
+def main():
+    choice = int(input("""---- BANK ----
+    Select your choice
+    [1] - View all clients
+    [2] - View all accounts
+    [3] - Search a client
+    [4] - Search a account
+    [5] - View Client balance
+    [6] - Total of clients
+    [0] - End
+    
+    ~~~>"""))
+    user_choice(choice)
+
+
+def user_choice(choice):
+    try:
+        if choice == 1:
+            view_clients()
+        elif choice == 2:
+            view_accounts()
+        elif choice == 3:
+            identifier = int(input("Client ID: "))
+            search_client_by_id(identifier)
+        elif choice == 4:
+            identifier = int(input("Account ID: "))
+            search_account_by_id(identifier)
+        elif choice == 5:
+            identifier = int(input("Client ID: "))
+            client_balance(identifier)
+        elif choice == 6:
+            count_client()
+        elif choice == 0:
+            end()
+    except ValueError:
+        print("[ERROR] Invalid input: Please enter a number.")
+        return_to_principal()
+    except Exception as e:
+        print(f"[ERROR] An unexpected error occurred: {e}")
+        return_to_principal()
+
+
+def invalid_option():
+    os.system('cls')
+    print("[ERROR] Invalid option")
+    return_to_principal()
+
+
 def view_clients():
+    os.system('cls')
     stmt_all_client = select(Client)
+    print("\nClients in Database")
     for client in session.scalars(stmt_all_client):
         print(client)
+    return_to_principal()
 
 
 def view_accounts():
+    os.system('cls')
     stmt_all_accounts = select(Account)
+    print("\nAccounts in Database")
     for account in session.scalars(stmt_all_accounts):
         print(account)
+    return_to_principal()
 
 
-def search_client_by_id(id):
-    stmt_search_clients = select(Client).where(Client.id == id)
+def search_client_by_id(identifier):
+    os.system('cls')
+    print("Selected client:")
+    stmt_search_clients = select(Client).where(Client.id == identifier)
     client = session.scalars(stmt_search_clients).first()
-    return client
+    print(client)
+    return_to_principal()
 
 
-def search_account_by_id(id):
-    stmt_search_account = select(Account).where(Account.id == id)
+def search_account_by_id(identifier):
+    os.system('cls')
+    print("Selected account:")
+    stmt_search_account = select(Account).where(Account.id == identifier)
     account = session.scalars(stmt_search_account).first()
-    return account
+    print(account)
+    return_to_principal()
 
 
-def user_balance(id):
-    stmt_client_balance = (select(Client.name, Client.cpf, Account.type, Account.balance).where(Client.id == id).
-                           join_from(Client, Account))
-    client = session.scalars(stmt_client_balance).first()
-    return client
-    
+def client_balance(identifier):
+    os.system('cls')
+    print("Client balance:")
+
+    stmt_client_balance = (
+            select(Client.name, Client.cpf, Account.type, Account.balance)
+            .where(Client.id == identifier)
+            .join(Account, Client.id == Account.id_client)
+        )
+
+    result = session.execute(stmt_client_balance).all()
+
+    if result:
+        for name, cpf, account_type, balance in result:
+            print(f"Name: {name} | CPF: {cpf} | Account Type: {account_type} | Balance: {balance:.2f}")
+    else:
+        print("No accounts found for this client.")
+
+    return_to_principal()
 
 
+def count_client():
+    os.system('cls')
+    stmt_count_client = select(func.count('*')).select_from(Client)
+    for count in session.scalars(stmt_count_client):
+        print(count)
+    return_to_principal()
 
 
+def return_to_principal():
+    input('Press enter to return')
+    main()
+
+
+def end():
+    os.system('cls')
+    print("End system...")
+    sleep(2)
+    os.system('cls')
+
+
+main()
